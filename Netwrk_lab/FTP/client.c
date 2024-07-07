@@ -9,6 +9,14 @@ void main()
 {
     int socketId;
     struct sockaddr_in serverAddress;
-    socketId=socket(AF_INET,);
+    socketId=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
+    if(socketId ==-1)
+    {
+        printf("socket creation failed");
+        return;
+    }
+    printf("socket created sucessfully");
+    
+
 }
 
