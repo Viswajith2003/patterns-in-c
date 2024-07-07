@@ -8,7 +8,7 @@
 void main()
 {
     int socketId,contionId;
-    struct sockaddr serverAddress,clientAddress;
+    struct sockaddr_in serverAddress,clientAddress;
 
     socketId = socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
     if(socketId == -1)
@@ -17,4 +17,10 @@ void main()
         return;
     }
     printf("Socket created sucessfully");
+    memset(&serverAddress,0,sizeof(serverAddress));
+    serverAddress.sin_family=AF_INET;
+    serverAddress.sin_addr.s_addr=htonl(INADDR_ANY);
+    serverAddress.sin_port=htons(8080);
+    
+    
 }
