@@ -53,11 +53,11 @@ void main()
     ssize_t received=recv(contionId,buffer,sizeof(buffer),0);
     if(received ==-1)
     {
-        printf("Filename receved failed");
+        printf("Receve failed");
         close(socketId);
         close(contionId);
         return;
     }
-    printf("Filename receved sucessfully");
+    printf("Filename :%s\n",buffer);
 
 }
