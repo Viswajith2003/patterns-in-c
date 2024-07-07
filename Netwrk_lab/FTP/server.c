@@ -22,5 +22,11 @@ void main()
     serverAddress.sin_addr.s_addr=htonl(INADDR_ANY);
     serverAddress.sin_port=htons(8080);
     
-    
+    if(bind (socketId,(struct sockaddr *)&serverAddress,sizeof(serverAddress))!=0)
+    {
+        printf("bind unsucessfull");
+        close(socketId);
+        return;
+    }
+    printf("bind sucessfull");
 }
