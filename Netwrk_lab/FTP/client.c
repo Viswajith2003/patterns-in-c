@@ -25,10 +25,29 @@ void main()
     if(connect (socketId,(struct sockaddr *)&serverAddress,sizeof(serverAddress))!=0)
     {
         printf("Connection failed");
+        close(socketId);
         return;
     }
     printf("Successfully connected");
+
+    char filename[100];
+    printf("Enter the filename: ");
+    scanf("%s",&filename);
+
+    if(send(socketId,filename,sizeof(filename),0)==-1)
+    {
+        printf("sending failed \n");
+        close(socketId);
+        return;
+    }
+    printf("Sucessfully sented");
+
     
+
+
+
+
+
 
 
 
