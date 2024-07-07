@@ -16,7 +16,14 @@ void main()
         return;
     }
     printf("socket created sucessfully");
+
+    memset(&serverAddress,0,sizeof(serverAddress));
+    serverAddress.sin_family=AF_INET;
+    serverAddress.sin_addr.s_addr=inet_addr("127.0.0.1");
+    serverAddress.sin_port=htons(8080);
+
     
+
 
 }
 
