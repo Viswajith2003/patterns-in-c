@@ -16,7 +16,7 @@ void main()
         printf("socket creation failed");
         return;
     }
-    printf("Socket created sucessfully");
+    printf("Socket created sucessfully \n");
     memset(&serverAddress,0,sizeof(serverAddress));
     serverAddress.sin_family=AF_INET;
     serverAddress.sin_addr.s_addr=htonl(INADDR_ANY);
@@ -28,7 +28,7 @@ void main()
         close(socketId);
         return;
     }
-    printf("bind sucessfull");
+    printf("bind sucessfull \n");
 
     if(listen (socketId,5)==-1)
     {
@@ -36,7 +36,7 @@ void main()
         close(socketId);
         return;
     }
-    printf("Sucessfully listened");
+    printf("Sucessfully listened \n");
 
     socklen_t len=sizeof(clientAddress);
     contionId=accept(socketId,(struct sockaddr *)&clientAddress,&len);
@@ -47,7 +47,7 @@ void main()
         close(contionId);
         return;
     }
-    printf("Connection accepted sucessfully from client");
+    printf("Connection accepted sucessfully from client \n");
 
     char filename[100];
     ssize_t received=recv(contionId,filename,sizeof(filename),0);
@@ -61,14 +61,17 @@ void main()
     printf("Filename is:%s\n",filename);
 
     FILE *file=fopen(filename,"r");
-    char filecontent[1024];
+    char filecontent[2048];
     memset(filecontent,0,sizeof(filecontent));
 
     if(file)
     {
         int c;
-        while((c=fgetc(file)!=EOF))
-        sprintf(filecontent,"%s%c",filecontent,c);
+        size_t len = 0;
+        while ((c = fgetc(file)) != EOF && len < sizeof(filecontent) - 1) {
+            filecontent[len++] = (char)c;
+        }
+        filecontent[len] = '\0';  // Null-terminate the string
         fclose(file);
         send(contionId,filecontent,sizeof(filecontent),0);
     }

@@ -15,7 +15,7 @@ void main()
         printf("socket creation failed");
         return;
     }
-    printf("socket created sucessfully");
+    printf("socket created sucessfully \n");
 
     memset(&serverAddress,0,sizeof(serverAddress));
     serverAddress.sin_family=AF_INET;
@@ -28,11 +28,11 @@ void main()
         close(socketId);
         return;
     }
-    printf("Successfully connected");
+    printf("Successfully connected \n");
 
     char filename[100];
     printf("Enter the filename: ");
-    scanf("%s",&filename);
+    scanf("%s",filename);
 
     if(send(socketId,filename,sizeof(filename),0)==-1)
     {
@@ -40,7 +40,7 @@ void main()
         close(socketId);
         return;
     }
-    printf("Sucessfully sented");
+    printf("Sucessfully sented \n");
 
     char filecontent[1024];
     ssize_t Received=recv(socketId,filecontent,sizeof(filecontent),0);
