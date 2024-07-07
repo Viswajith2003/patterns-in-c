@@ -7,7 +7,7 @@
 
 void main()
 {
-    int socketId,conntnId;
+    int socketId;
     struct sockaddr_in serverAddress;
     socketId=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
     if(socketId ==-1)
@@ -42,17 +42,15 @@ void main()
     }
     printf("Sucessfully sented");
 
-    
-
-
-
-
-
-
-
-
-
-
-
+    char filecontent[1024];
+    ssize_t Received=recv(socketId,filecontent,sizeof(filecontent),0);
+    if(Received == -1)
+    {
+        printf("receving failed");
+        close(socketId);
+        return;
+    }
+    printf("The file content is: %s \n",filecontent);
+    close(socketId);
 }
 
