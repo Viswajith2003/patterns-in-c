@@ -49,8 +49,8 @@ void main()
     }
     printf("Connection accepted sucessfully from client");
 
-    char buffer[100];
-    ssize_t received=recv(contionId,buffer,sizeof(buffer),0);
+    char filename[100];
+    ssize_t received=recv(contionId,filename,sizeof(filename),0);
     if(received ==-1)
     {
         printf("Receve failed");
@@ -58,6 +58,23 @@ void main()
         close(contionId);
         return;
     }
-    printf("Filename :%s\n",buffer);
+    printf("Filename is:%s\n",filename);
 
+    FILE *file=fopen(filename,"r");
+    char filecontent[1024];
+    memset(filecontent,0,sizeof(filecontent));
+
+    if(file)
+    {
+        int c;
+        while((c=fgetc(file)!=EOF))
+        sprintf(filecontent,"%s%c",filecontent,c);
+        fclose(file);
+        send(contionId,filecontent,sizeof(filecontent),0);
+    }
+    else{
+        printf("something went wrong");
+    }
+    close(socketId);
+    close(contionId);
 }
