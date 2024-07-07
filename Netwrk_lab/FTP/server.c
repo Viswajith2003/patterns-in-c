@@ -49,4 +49,15 @@ void main()
     }
     printf("Connection accepted sucessfully from client");
 
+    char buffer[100];
+    ssize_t received=recv(contionId,buffer,sizeof(buffer),0);
+    if(received ==-1)
+    {
+        printf("Filename receved failed");
+        close(socketId);
+        close(contionId);
+        return;
+    }
+    printf("Filename receved sucessfully");
+
 }
