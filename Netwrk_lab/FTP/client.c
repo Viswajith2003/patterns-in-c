@@ -7,7 +7,7 @@
 
 void main()
 {
-    int socketId;
+    int socketId,conntnId;
     struct sockaddr_in serverAddress;
     socketId=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
     if(socketId ==-1)
@@ -22,7 +22,17 @@ void main()
     serverAddress.sin_addr.s_addr=inet_addr("127.0.0.1");
     serverAddress.sin_port=htons(8080);
 
+    if(connect (socketId,(struct sockaddr *)&serverAddress,sizeof(serverAddress))!=0)
+    {
+        printf("Connection failed");
+        return;
+    }
+    printf("Successfully connected");
     
+
+
+
+
 
 
 }
