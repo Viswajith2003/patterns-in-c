@@ -29,4 +29,23 @@ void main()
         return;
     }
     printf("bind sucessfull");
+
+    if(listen (socketId,5)==-1)
+    {
+        printf("listen failed");
+        close(socketId);
+        return;
+    }
+    printf("Sucessfully listened");
+
+    socklen_t len=sizeof(clientAddress);
+    contionId=accept(socketId,(struct sockaddr *)&clientAddress,&len);
+    if(contionId == -1)
+    {
+        printf("Connection accept failed");
+        close(socketId);
+        close(contionId);
+        return;
+    }
+
 }
