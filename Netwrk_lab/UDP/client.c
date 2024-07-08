@@ -26,7 +26,30 @@ void main()
     {
         printf("To server :");
         fgets(buffer,sizeof(buffer),stdin);
-        sendto(buffer,strlen(buffer),0,(struct sockaddr *))
+        sendto(socketId,buffer,strlen(buffer),0,(struct sockaddr *)&serverAddress,sizeof(serverAddress));
+        buffer[strcspn(buffer,"\n")]="\0";
+        if(strcmp(buffer,"exit")==0)
+        {
+            printf("client is exiting");
+            break;
+        }
+
+        ssize_t Received=recvfrom(socketId,buffer,sizeof(buffer),0,NULL,NULL);
+        if(Received == -1)
+        {
+            printf("Receved failed");
+            close(socketId);
+            return 1;
+        }
+        printf("from server :%s\n",buffer);
+        if(strcmp(buffer,"exit")==0)
+        {
+            printf("exit cmd received,closing connection");
+            break;
+        }
+
+    
     }
+    close(socketId);
 
 }
