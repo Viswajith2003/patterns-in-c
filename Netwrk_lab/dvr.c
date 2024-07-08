@@ -22,6 +22,9 @@ void main()
             route[i].hop[j]=j;
         }
     }
+    do{
+
+    }while(count != 0);
 
     printf("Routing Table:\n");
     for(int i=0;i<nodes;i++)
