@@ -22,6 +22,17 @@ void main()
             route[i].hop[j]=j;
         }
     }
+    printf("The routing table is:\n");
+    for(int i=0;i<nodes;i++)
+    {
+        printf("Router %d",i+1);
+        printf("DEST \t DIST \t Nxt-HOP \n");
+        for(int j=0;j<nodes;j++)
+        {
+            printf("%d \t %d \t %d \n",j+1,route[i].dist[j],route[i].hop[j]+1);
+        }
+    }
+
         
 }
 
