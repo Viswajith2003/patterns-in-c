@@ -22,7 +22,8 @@ void main()
             route[i].hop[j]=j;
         }
     }
-    printf("The routing table is:\n");
+
+    printf("Routing Table:\n");
     for(int i=0;i<nodes;i++)
     {
         printf("Router %d",i+1);
