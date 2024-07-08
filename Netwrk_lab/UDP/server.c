@@ -13,7 +13,7 @@ void main()
     if(socketId==-1)
     {
         printf("socket creation failed");
-        return 1;
+        return ;
     }
     printf("socket created sucessfully \n");
     memset(&serverAddress,0,sizeof(serverAddress));
@@ -25,7 +25,7 @@ void main()
     {
         printf("bind failed ");
         close(socketId);
-        return 1;
+        return ;
     }
     printf("Binded sucessfully\n");
 
@@ -38,7 +38,7 @@ void main()
         {
             printf("received failed ");
             close(socketId);
-            return 1;
+            return ;
         }
         printf("from client :%s\n",buffer);
 
