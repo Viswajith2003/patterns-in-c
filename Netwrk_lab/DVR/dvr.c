@@ -23,19 +23,33 @@ void main()
         }
     }
     do{
-
+        int count=0;
+        for(int i=0;i<nodes;i++){
+            for(int j=0;j<nodes;j++){
+                for(int k=0;k<nodes;k++)
+                {
+                    if(route[i].dist[j]>route[i].dist[k]+cost[k][j])
+                    {
+                        route[i].dist[j]=route[i].dist[k]+cost[k][j];
+                        route[i].hop[j]=k;
+                        count++;
+                    }
+                }
+            }
+        }
     }while(count != 0);
 
-    printf("Routing Table:\n");
-    for(int i=0;i<nodes;i++)
+    printf("Routing Table\n");
+    for (int i = 0; i < nodes; i++)
     {
-        printf("Router %d",i+1);
-        printf("DEST \t DIST \t Nxt-HOP \n");
-        for(int j=0;j<nodes;j++)
+        printf("\nNo \t dist \t hop \n");
+        for (int j = 0; j < nodes; j++)
         {
             printf("%d \t %d \t %d \n",j+1,route[i].dist[j],route[i].hop[j]+1);
         }
+        
     }
+    
 
         
 }
@@ -94,8 +108,7 @@ void main()
 //       for (int j = 0; j < nodes; j++)
 //         for (int k = 0; k < nodes; k++)
 
-//           if (routingTable[i].dist[j] >
-//               costMatrix[i][k] + routingTable[k].dist[j]) {
+//           if (routingTable[i].dist[j] > costMatrix[i][k] + routingTable[k].dist[j]) {
 
 //             routingTable[i].dist[j] =
 //                 costMatrix[i][k] + routingTable[k].dist[j];
