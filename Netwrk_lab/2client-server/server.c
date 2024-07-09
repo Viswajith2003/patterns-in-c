@@ -14,7 +14,7 @@ void main()
         printf("socket creation failed");
         return;
     }
-    printf("socket creation successfull");
+    printf("socket creation successfull\n");
     memset(&serverAddress,0,sizeof(serverAddress));
     serverAddress.sin_family=AF_INET;
     serverAddress.sin_addr.s_addr=htonl(INADDR_ANY);
@@ -25,14 +25,14 @@ void main()
         close(socketId);
         return;
     }
-    printf("successfully bounded");
+    printf("successfully bounded\n");
     if(listen(socketId,5)==-1)
     {
         printf("Listen failed");
         close(socketId);
         return;
     }
-    printf("Listening...");
+    printf("Listening...\n");
 
     socklen_t len=sizeof(clientAddress);
     connId=accept(socketId,(struct sockaddr *)&clientAddress,&len);
@@ -43,7 +43,7 @@ void main()
         close(connId);
         return;
     }
-    printf("client accepted");
+    printf("client accepted\n");
 
     char buffer[100];
     while(1)
@@ -61,14 +61,14 @@ void main()
             printf("client disconnected");
             break;
         }
-        printf("from client %s:",buffer);
+        printf("\nfrom client %s:",buffer);
         if(strcmp(buffer,"exit")==0)
         {
             printf("exit cmd received, close the connection");
             break;
         }
 
-        printf("To client :");
+        printf("\nTo client :");
         fgets(buffer,sizeof(buffer),stdin);
         buffer[strcspn(buffer,"\n")]!="\0";
         if(send(connId,buffer,strlen(buffer)+1,0)==-1)
